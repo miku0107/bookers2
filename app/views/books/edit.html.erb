@@ -1,32 +1,43 @@
-<h1>Book#edit</h1>
-
-<h1>Editing Book</h1>
-
-<%= form_with model: @book do |f| %>
-
-<div>
+<body>
+  
+  <div class="error_message">
+    <% if @book.errors.any? %>
+      <h4><%= @book.errors.count %>error prohibited this obj from being saved:</h4>
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>  
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      
+      <h1>Editing Book</h1>
+      <%= form_with model: @book do |f| %>
+  
   <div>
+  <div class="form-group">
     <label>Title</label>
-    <div>
-        <%= f.text_field :title %>
-    </div>    
+    <br><%= f.text_field :title, class: "form-control" %>
   </div>
-  <div>
+  <div class="form-group">
     <label>Opinion</label>
       <div>
-        <%= f.text_area :body %>
+        <%= f.text_area :body, class: "form-control" %>
       </div>      
   </div>
-  <div>
-  <%= f.submit 'Update Book' %>
-</div>
-</div>
-<% end %>
-
-<% @books.each do |book| %>
-
-<%= link_to "Show", book_path(book.id) %>
-<%= link_to "Back", books_path %>
-
-<% end %>
-
+  <div class="form-group">
+  <%= f.submit 'Update Book', class: "btn btn-success" %>
+  </div>
+  </div>
+  
+      <% end %>
+      <%= link_to book_path(@book.id) do %>Show<% end %> | <%= link_to books_path do %>Back<% end %>
+  
+      </div>
+    </div>
+  </div>
+</body>
